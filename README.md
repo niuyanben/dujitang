@@ -25,3 +25,16 @@ server {
 	}
 }
 ```
+
+
+### SQL
+```sql
+CREATE TABLE `archive` ( 
+`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 
+`content` TEXT NOT NULL, `author` TEXT, 
+`likes` INTEGER NOT NULL, 
+`unlikes` INTEGER NOT NULL DEFAULT 0, 
+`favorites` INTEGER NOT NULL, 
+`creatTime` INTEGER NOT NULL 
+)
+```
