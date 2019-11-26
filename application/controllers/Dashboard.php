@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Dashboard extends App_Controller {
 
-	const LIMIT = 50;
+	const LIMIT = 10;
 
 	public function index() {
 		$this->load->model('archive_model');
@@ -35,7 +35,6 @@ class Dashboard extends App_Controller {
 		}
 		$this->load->model('archive_model');
 		$effected = $this->archive_model->deleteById($id);
-		echo $effected;
 		effected >0 ? $this->success() : $this->error();
 	}
 }

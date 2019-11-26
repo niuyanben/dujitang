@@ -19,24 +19,20 @@
 				<thead>
 					<tr>
 						<th scope="col">#</th>
-						<th scope="col">First</th>
-						<th scope="col">Last</th>
-						<th scope="col">Handle</th>
-						<th scope="col">Last</th>
-						<th scope="col">Handle</th>
-						<th scope="col">#</th>
+						<th scope="col">文本</th>
+						<th scope="col">作者</th>
+						<th scope="col">统计</th>
+						<th scope="col">操作</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php foreach ($archiveList as $key => $archive) { ?>
 						<tr>
-							<th><?=$archive->id?></th>
+							<td title="<?=date('y-m-d H:i:s', $archive->createTime)?>"><?=date('y-m-d', $archive->createTime)?></td>
 							<td><?=$archive->content?></td>
 							<td><?=$archive->author?></td>
-							<td><?=$archive->likes?> / <?=$archive->unlikes?></td>
-							<td><?=$archive->favorites?></td>
-							<td><?=date('y-m-d H:i:s', $archive->createTime)?></td>
-							<td><button data-id="<?=$archive->id?>" class="btn btn-link btn-delete">删除</button></td>
+							<td><?=$archive->likes?> / <?=$archive->unlikes?> / <?=$archive->favorites?></td>
+							<td><button data-id="<?=$archive->id?>" class="btn btn-link btn-delete">x</button></td>
 						</tr>
 					<?php } ?>
 
@@ -45,7 +41,7 @@
 
 
 		</div>
-		<div class="row text-right">
+		<div class="row">
 		<?=$pager?>
 		</div>
 	</div>

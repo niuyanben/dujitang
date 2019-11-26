@@ -14,10 +14,41 @@
 	<link rel="icon" href="/favicon.ico" type="image/x-icon" id="page_favionc">
 	<link href="<?= base_url('assets/bootstrap.min.css') ?>" rel="stylesheet">
 	<link href="assets/main.css" rel="stylesheet">
+	<link href="//at.alicdn.com/t/font_1526687_z9pvzlz648.css" rel="stylesheet">
+
 	<link rel="alternate icon" type="image/png" href="icon.png">
 	<style type="text/css">
 		.main-wrapper {
 			align-items: center;
+		}
+
+		.djt-block {
+			padding-bottom: 20px;
+		}
+
+		.djt-block .social {
+			display: none;
+			text-align: center;
+		}
+
+		.djt-block #sentence {
+			cursor: pointer;
+		}
+
+		.djt-block:hover .social {
+			display: block;
+		}
+
+		.djt-block .social i {
+			font-size: 28px;
+			color: #dc3545;
+			cursor: pointer;
+			transition: all 0.6s ease-in;
+			-webkit-transition: all 0.6s ease-in;
+		}
+
+		.djt-block .social i:hover {
+			transform: scale(1.4);
 		}
 	</style>
 
@@ -25,28 +56,19 @@
 
 <body>
 	<?php $this->load->view('header') ?>
-	<div class="justify-content-center text-center" style="position: fixed;top: 30%;width:100%">
+	<div class="djt-block justify-content-center text-center" data-id="1" style="position: fixed;top: 30%;width: 80%;margin-left: 10%;">
 		<span id="sentence" style="font-size: 2rem;">不要放弃你的梦，继续睡！</span>
+		<div class="social"><span onclick="like()" class="btn-like"><i class="iconfont icon-favorite"></i></span></div>
 	</div>
 	<div class="col text-center" style="position: fixed;bottom: 20%;width:100%">
-		<button style="font-size: 18px;" onclick="refresh()" class="btn btn-danger">好汤，再来一碗</button>
+		<button style="font-size: 18px;" class="btn btn-refresh btn-danger">好汤，再来一碗</button>
 	</div>
-	<div class="container wrapper">
-
-
-
-
-
-
-
-
-
-	</div>
+	<div class="container wrapper"></div>
 	<div class="modal fade" id="publishModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalCenterTitle">添碗毒鸡汤</h5>
+					<h5 class="modal-title">添碗毒鸡汤</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -77,24 +99,62 @@
 	<script type="text/javascript">
 		var count = datas.length;
 
-		function refresh() {
-			var rand = Math.floor(Math.random() * (count + 1));
-			document.getElementById('sentence').innerText = datas[rand];
-		}
-		refresh();
+		$(function() {
+			var djtList = [];
 
-		function publish (){
+			function fetch() {
+				$.get('api/random', function(res) {
+					if (res.code == 200) {
+						djtList = djtList.concat(res.data.archiveList);
+						render();
+						console.log(djtList.length);
+					}
+				}, 'json');
+			}
+
+			function render() {
+				var djt = djtList.shift();
+				$('.djt-block').data(djt.id);
+				$('#sentence').text(djt.content);
+				if (djtList.length < 5) {
+					fetch();
+				}
+			}
+			fetch();
+
+			$('.btn-refresh').click(function() {
+				render();
+			});
+		});
+
+		function like() {
+			var id = $('.djt-block').data('id');
+			$.post('/like', {
+				'id': id
+			}, function(res) {
+				if (res.code == 200) {
+					alert('成功');
+				} else {
+					alert('失败');
+				}
+			}, 'json');
+		}
+
+		function publish() {
 			var content = $('#publishForm textarea[name="content"]').val();
 			content = $.trim(content);
 			var author = $('#publishForm input[name="author"]').val();
 			author = $.trim(author);
-			if(content.length == 0 || content.length > 200 || author.length > 60) {
+			if (content.length == 0 || content.length > 200 || author.length > 60) {
 				alert('content invalid');
 				return;
 			}
 			alert(content);
-			$.post('/publish', {'content' : content, 'author' : author}, function(res){
-				if(res.code == 200) {
+			$.post('/publish', {
+				'content': content,
+				'author': author
+			}, function(res) {
+				if (res.code == 200) {
 					alert('成功');
 					$('#publishModal').modal('hide');
 				} else {

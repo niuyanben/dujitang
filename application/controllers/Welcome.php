@@ -30,4 +30,19 @@ class Welcome extends App_Controller {
 			 $id > 0 ? $this->success() : $this->error();
 		}
 	}
+
+
+	public function like()
+	{
+		// ip 限制 on redis
+
+		$id = $this->input->post('id');
+		$this->load->model('archive_model');
+		$archive = $this->archive_model->getById($id);
+		if(empty($archive)) {
+			$this->error('404');
+		}
+		$effected = $this->archive_model->like($id);
+		$effected > 0 ? $this->success() : $this->error();
+	}
 }

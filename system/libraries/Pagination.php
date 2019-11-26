@@ -310,7 +310,7 @@ class CI_Pagination {
 	 *
 	 * @var	string
 	 */
-	protected $data_page_attr = 'data-ci-pagination-page';
+	protected $data_page_attr = 'class="page-link" data-ci-pagination-page';
 
 	/**
 	 * CI Singleton

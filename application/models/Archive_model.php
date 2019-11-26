@@ -20,4 +20,11 @@ class Archive_model extends MY_Model
     	return $this->archive_model->select(null, null, 'createTime desc', $limit, $offset);
     }
 
+    public function like($id)
+    {
+        $this->db->where('id',$id);
+        $this->db->set('likes','likes+1', FALSE);
+        return $this->db->update($this->table);
+    }
+
 }
