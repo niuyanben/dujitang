@@ -45,4 +45,5 @@ class Welcome extends App_Controller {
 		$effected = $this->archive_model->like($id);
 		$effected > 0 ? $this->success() : $this->error();
 	}
+
 }
