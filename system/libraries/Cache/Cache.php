@@ -252,4 +252,10 @@ class CI_Cache extends CI_Driver_Library {
 
 		return $support[$driver];
 	}
+	
+	
+	public function __call($method, $parameters)
+	{
+		return $this->{$driver}->$method(...$parameters);
+	}
 }
