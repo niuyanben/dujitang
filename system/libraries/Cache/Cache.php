@@ -254,8 +254,28 @@ class CI_Cache extends CI_Driver_Library {
 	}
 	
 	
-	public function __call($method, $parameters)
-	{
-		return $this->{$driver}->$method(...$parameters);
-	}
+	public function rpop($id)
+    {
+        return $this->{$this->_adapter}->rpop($id);
+    }
+    public function lpop($id)
+    {
+        return $this->{$this->_adapter}->lpop($id);
+    }
+    public function rpush($id, $value)
+    {
+        return $this->{$this->_adapter}->rpush($id, $value);
+    }
+    public function lpush($id, $value)
+    {
+        return $this->{$this->_adapter}->lpush($id, $value);
+    }
+    public function lrange($id, $start, $end)
+    {
+        return $this->{$this->_adapter}->lrange($id, $start, $end);
+    }
+    public function ltrim($id, $start, $end)
+    {
+        return $this->{$this->_adapter}->ltrim($id, $start, $end);
+    }
 }

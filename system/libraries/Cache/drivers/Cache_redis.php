@@ -128,7 +128,7 @@ class CI_Cache_redis extends CI_Driver
 				$success = $this->_redis->connect($config['socket']);
 			}
 			else // tcp socket
-			{
+			{var_dump($config);
 				$success = $this->_redis->connect($config['host'], $config['port'], $config['timeout']);
 			}
 
@@ -327,4 +327,29 @@ class CI_Cache_redis extends CI_Driver
 			$this->_redis->close();
 		}
 	}
+
+	public function rpop($id)
+    {
+        return $this->_redis->rPop($id);
+    }
+    public function lpop($id)
+    {
+        return $this->_redis->lPop($id);
+    }
+    public function rpush($id, $value)
+    {
+        return $this->_redis->rPush($id, $value);
+    }
+    public function lpush($id, $value)
+    {
+        return $this->_redis->lPush($id, $value);
+    }
+    public function lrange($id, $start, $end)
+    {
+        return $this->_redis->lRange($id, $start, $end);
+    }
+    public function ltrim($id, $start, $end)
+    {
+        return $this->_redis->lTrim($id, $start, $end);
+    }
 }
