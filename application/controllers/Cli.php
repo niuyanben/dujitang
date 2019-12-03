@@ -12,12 +12,18 @@ class Cli extends Base_Controller {
     }
 	
 	public function redis() {
+
 		$this->load->model('archive_model');
 		$archiveList = $this->archive_model->random(5);
 		// 
 		$this->load->driver('cache', ['adapter' => 'redis']);
-		$this->cache->redis->save('archives', 'abc');
-		echo 'haha';
+
+
+		foreach($archiveList as $archive){
+			$this->cache->redis->lpush('archives', json_encode($archive, JSON_UNESCAPED_UNICODE));
+		}
+		
+		echo 'DONE' . PHP_EOL;
 	}
 
 

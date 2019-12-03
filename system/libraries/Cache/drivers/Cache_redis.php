@@ -128,7 +128,7 @@ class CI_Cache_redis extends CI_Driver
 				$success = $this->_redis->connect($config['socket']);
 			}
 			else // tcp socket
-			{var_dump($config);
+			{
 				$success = $this->_redis->connect($config['host'], $config['port'], $config['timeout']);
 			}
 
