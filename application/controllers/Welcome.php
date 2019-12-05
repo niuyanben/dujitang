@@ -8,6 +8,16 @@ class Welcome extends App_Controller {
 		$this->load->view('welcome_message');
 	}
 
+	public function login()
+	{
+		$token = $this->input->get('token');
+		if($token == '1') {
+			$this->load->library('session');
+			$this->session->set_userdata('isLogin', TRUE);
+			redirect('dashboard');
+		}
+	}
+
 	public function publish() {
 
 		$this->load->library('form_validation');
@@ -18,6 +28,7 @@ class Welcome extends App_Controller {
 		$data = [
 			'content' => $this->input->post('content'),
 			'author' => $this->input->post('author'),
+			'attachJson' => json_encode(['ip' => $this->input->ip_address()], JSON_UNESCAPED_UNICODE),
 			'createTime' => time()
 		];
 

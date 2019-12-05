@@ -29,6 +29,7 @@
 		.djt-block .social {
 			display: none;
 			text-align: center;
+			cursor: pointer;
 		}
 
 		.djt-block #sentence {
@@ -45,6 +46,7 @@
 			cursor: pointer;
 			transition: all 0.6s ease-in;
 			-webkit-transition: all 0.6s ease-in;
+			vertical-align: sub;
 		}
 
 		.djt-block .social i:hover {
@@ -58,7 +60,7 @@
 	<?php $this->load->view('header') ?>
 	<div class="djt-block justify-content-center text-center" data-id="1" style="position: fixed;top: 30%;width: 80%;margin-left: 10%;">
 		<span id="sentence" style="font-size: 2rem;">不要放弃你的梦，继续睡！</span>
-		<div class="social"><span onclick="like()" class="btn-like"><i class="iconfont icon-like"></i></span></div>
+		<div class="social"><span onclick="like()" class="btn-like"><i class="iconfont icon-like"></i> 好汤</span></div>
 	</div>
 	<div class="col text-center" style="position: fixed;bottom: 20%;width:100%">
 		<button style="font-size: 18px;" class="btn btn-refresh btn-danger">好汤，再来一碗</button>

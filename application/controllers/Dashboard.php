@@ -47,6 +47,6 @@ class Dashboard extends App_Controller {
 		}
 		$this->load->model('archive_model');
 		$effected = $this->archive_model->deleteById($id);
-		effected >0 ? $this->success() : $this->error();
+		$effected >0 ? $this->success() : $this->error();
 	}
 }
