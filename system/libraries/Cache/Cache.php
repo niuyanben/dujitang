@@ -254,7 +254,119 @@ class CI_Cache extends CI_Driver_Library {
 	}
 	
 	
-	public function rpop($id)
+	public function exists($id)
+    {
+        return $this->{$this->_adapter}->exists($id);
+    }
+    public function rename($id, $reid)
+    {
+        return $this->{$this->_adapter}->rename($id, $reid);
+    }
+    public function expire($id, $sec)
+    {
+        return $this->{$this->_adapter}->expire($id, $sec);
+    }
+    public function ttl($id)
+    {
+        return $this->{$this->_adapter}->ttl($id);
+    }
+    public function keys($pattern)
+    {
+        return $this->{$this->_adapter}->keys($pattern);
+    }
+    public function hkeys($id)
+    {
+        return $this->{$this->_adapter}->hkeys($id);
+    }
+    public function hvals($id)
+    {
+        return $this->{$this->_adapter}->hvals($id);
+    }
+    public function hgetall($id)
+    {
+        return $this->{$this->_adapter}->hgetall($id);
+    }
+    public function hget($id, $subId)
+    {
+        return $this->{$this->_adapter}->hget($id, $subId);
+    }
+    public function hset($id, $subId, $data)
+    {
+        return $this->{$this->_adapter}->hset($id, $subId, $data);
+    }
+    public function hlen($id)
+    {
+        return $this->{$this->_adapter}->hlen($id);
+    }
+    public function hmget($id, $data)
+    {
+        return $this->{$this->_adapter}->hmget($id, $data);
+    }
+    public function hmset($id, $data)
+    {
+        return $this->{$this->_adapter}->hmset($id, $data);
+    }
+    public function hdel($id, $subId)
+    {
+        return $this->{$this->_adapter}->hdel($id, $subId);
+    }
+    public function hincr($id, $subId, $data)
+    {
+        return $this->{$this->_adapter}->hincr($id, $subId, $data);
+    }
+    public function sadd($id, $value)
+    {
+        return $this->{$this->_adapter}->sadd($id, $value);
+    }
+    public function smembers($id)
+    {
+        return $this->{$this->_adapter}->smembers($id);
+    }
+    public function srandmember($id, $count = 1)
+    {
+        return $this->{$this->_adapter}->srandmember($id, $count);
+    }
+    public function srem($id, $value)
+    {
+        return $this->{$this->_adapter}->srem($id, $value);
+    }
+    public function zadd($id, $score, $value)
+    {
+        return $this->{$this->_adapter}->zadd($id, $score, $value);
+    }
+    public function zincrby($id, $score, $value)
+    {
+        return $this->{$this->_adapter}->zincrby($id, $score, $value);
+    }
+    public function zrange($id, $start, $end, $options)
+    {
+        return $this->{$this->_adapter}->zrange($id, $start, $end, $options);
+    }
+    public function zrevrange($id, $start, $end, $options)
+    {
+        return $this->{$this->_adapter}->zrevrange($id, $start, $end, $options);
+    }
+    public function zrangebyscore($id, $startScore, $endScore, $options)
+    {
+        return $this->{$this->_adapter}->zrangebyscore($id, $startScore, $endScore, $options);
+    }
+    public function zrank($id, $member)
+    {
+        return $this->{$this->_adapter}->zrank($id, $member);
+    }
+    public function zrevrank($id, $member)
+    {
+        return $this->{$this->_adapter}->zrevrank($id, $member);
+    }
+    public function zscore($id, $member)
+    {
+        return $this->{$this->_adapter}->zscore($id, $member);
+    }
+    public function zrem($id, $value)
+    {
+        return $this->{$this->_adapter}->zrem($id, $value);
+    }
+    public function rpop($id)
     {
         return $this->{$this->_adapter}->rpop($id);
     }

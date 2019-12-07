@@ -14,10 +14,10 @@ class Archive_model extends MY_Model
     	return $this->archive_model->select(null, null, null, $num);
     }
 
-    public function latest($page = 1, $limit = 10)
+    public function latest($page = 1, $where = [], $limit = 10)
     {
     	$offset = ($page - 1) * $limit;
-    	return $this->archive_model->select(null, null, 'createTime desc', $limit, $offset);
+    	return $this->archive_model->select(null, $where, 'createTime desc', $limit, $offset);
     }
 
     public function like($id)

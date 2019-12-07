@@ -6,13 +6,14 @@ class Api extends Base_Controller {
 
 	public function random($num = 20) {
 		$this->load->model('archive_model');
-
-		$data['archiveList'] = $this->archive_model->random($num);
-
+		$this->load->driver('cache', ['adapter' => 'redis']);
+		$data['archiveList'] = [];
+		$archiveList = $this->cache->redis->srandmember('archives', $num); // 
+		foreach($archiveList as $archive) {
+			$data['archiveList'][] = json_decode($archive);
+		}
 		$this->success($data);
 	}
-
-
 
 
 }

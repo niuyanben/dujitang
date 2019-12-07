@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 $config['page_query_string'] = TRUE;
-$config['query_string_segment'] = 'p';
+$config['query_string_segment'] = 'page';
 $config['num_links'] = 3;
 $config['full_tag_open'] = '<ul class="pagination">';
 $config['full_tag_close'] = '</ul>';

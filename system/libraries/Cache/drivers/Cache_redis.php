@@ -328,7 +328,111 @@ class CI_Cache_redis extends CI_Driver
 		}
 	}
 
-	public function rpop($id)
+	public function exists($id)
+    {
+        return $this->_redis->exists($id);
+    }
+    public function expire($id, $sec)
+    {
+        return $this->_redis->expire($id, $sec);
+    }
+    public function ttl($id)
+    {
+        return $this->_redis->ttl($id);
+    }
+    public function keys($pattern)
+    {
+        return $this->_redis->keys($pattern);
+    }
+    public function hkeys($id)
+    {
+        return $this->_redis->hKeys($id);
+    }
+    public function hvals($id)
+    {
+        return $this->_redis->hvals($id);
+    }
+    public function hgetall($id)
+    {
+        return $this->_redis->hGetAll($id);
+    }
+    public function hget($id, $subId)
+    {
+        return $this->_redis->hGet($id, $subId);
+    }
+    public function hset($id, $subId, $data)
+    {
+        return $this->_redis->hSet($id, $subId, $data);
+    }
+    public function hmget($id, $data)
+    {
+        return $this->_redis->hMGet($id, $data);
+    }
+    public function hmset($id, $data)
+    {
+        return $this->_redis->hMset($id, $data);
+    }
+    public function hdel($id, $subId)
+    {
+        return $this->_redis->hDel($id, $subId);
+    }
+    public function hincr($id, $subId, $data)
+    {
+        return $this->_redis->hIncrBy($id, $subId, $data);
+    }
+    public function sadd($id, $value)
+    {
+        return $this->_redis->sAdd($id, $value);
+    }
+    public function smembers($id)
+    {
+        return $this->_redis->sMembers($id);
+    }
+    public function srandmember($id, $count = 1)
+    {
+        return $this->_redis->sRandMember($id, $count);
+    }
+    public function srem($id, $value)
+    {
+        return $this->_redis->sRem($id, $value);
+    }
+    public function zadd($id, $score, $value)
+    {
+        return $this->_redis->zAdd($id, $score, $value);
+    }
+    public function zincrby($id, $score, $value)
+    {
+        return $this->_redis->zIncrBy($id, $score, $value);
+    }
+    public function zrange($id, $start, $end, $options)
+    {
+        return $this->_redis->zRange($id, $start, $end, $options);
+    }
+    public function zrevrange($id, $start, $end, $options)
+    {
+        return $this->_redis->zRevRange($id, $start, $end, $options);
+    }
+    public function zrangebyscore($id, $startScore, $endScore, $options)
+    {
+        return $this->_redis->zRangeByScore($id, $startScore, $endScore, $options);
+    }
+    public function zrank($key, $member)
+    {
+        return $this->_redis->zRank($key, $member);
+    }
+    public function zrevrank($key, $member)
+    {
+        return $this->_redis->zRevRank($key, $member);
+    }
+    public function zscore($key, $member)
+    {
+        return $this->_redis->zScore($key, $member);
+    }
+    public function zrem($id, $value)
+    {
+        return $this->_redis->zRem($id, $value);
+    }
+    public function rpop($id)
     {
         return $this->_redis->rPop($id);
     }

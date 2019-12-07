@@ -6,7 +6,7 @@ class Dashboard extends App_Controller {
 	const LIMIT = 10;
 
 	protected $isLogin = FALSE;
-
+	
 	
 	function __construct() {
 		parent::__construct();
@@ -20,17 +20,23 @@ class Dashboard extends App_Controller {
 	public function index() {
 		$this->load->model('archive_model');
 
-		$p = $this->input->get ( 'p', true ) ?: 1;
+		$page = $this->input->get ( 'page', true ) ?: 1;
 		
+		$status = intval($this->input->get ( 'status', true ) ?: 0);
 
-		$data['archiveList'] = $this->archive_model->latest($p, self::LIMIT);
+		$where = [];
+		if($status) {
+			$where['status'] = $status;
+		}
+
+		$data['archiveList'] = $this->archive_model->latest($page, $where, self::LIMIT);
 
 		//
-		// $this->libraries->load('pagination');
 		$this->config->load ( 'pagination' );
-		$config ['total_rows'] = $this->archive_model->count();
-		$config ['first_url'] = 'dashboard';
+		$config ['total_rows'] = $this->archive_model->count($where);
+		// $config ['first_url'] = 'dashboard';
 		$config ['per_page'] = self::LIMIT;
+		$config ['base_url'] =  base_url('dashboard') . '?status=';
 		$this->pagination->initialize ( $config );
 		$pager = $this->pagination->create_links ();
 

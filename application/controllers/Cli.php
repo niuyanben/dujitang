@@ -28,7 +28,7 @@ class Cli extends Base_Controller {
 			echo "  开始导第 {$i} 页， 从 {$offset} 开始" . PHP_EOL;
 			$archiveList = $this->archive_model->select(null, null, 'id asc', $limit, $offset);
 			foreach($archiveList as $archive){
-				$this->cache->redis->lpush('archives', json_encode($archive, JSON_UNESCAPED_UNICODE)); // 
+				$this->cache->redis->sadd('archives', json_encode($archive, JSON_UNESCAPED_UNICODE)); // 
 			}
 		}
 		echo 'DONE' . PHP_EOL;
