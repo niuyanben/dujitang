@@ -389,5 +389,14 @@ class CI_Cache extends CI_Driver_Library {
     public function ltrim($id, $start, $end)
     {
         return $this->{$this->_adapter}->ltrim($id, $start, $end);
+	}
+	
+	function incr($key, $offset = 1, $ttl = 86400)
+    {
+        $incr =$this->{$this->_adapter}->increment($key, $offset);
+        if ($incr == $offset) {
+            $this->{$this->_adapter}->expire($key, $ttl);
+        }
+        return $incr;
     }
 }

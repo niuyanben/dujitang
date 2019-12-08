@@ -150,7 +150,6 @@
 				alert('content invalid');
 				return;
 			}
-			alert(content);
 			$.post('/publish', {
 				'content': content,
 				'author': author
@@ -159,7 +158,7 @@
 					alert('成功');
 					$('#publishModal').modal('hide');
 				} else {
-					alert('失败');
+					alert(res.msg);
 				}
 			}, 'json');
 		}

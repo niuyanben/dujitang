@@ -13,7 +13,8 @@ class Base_Controller extends CI_Controller {
     		'code' => 200,
     		'msg' => $msg,
     		'data' => $data
-    	], JSON_UNESCAPED_UNICODE);
+        ], JSON_UNESCAPED_UNICODE);
+        exit();
     }
 
     public function error($msg = 'error', $code = -1)
@@ -22,7 +23,8 @@ class Base_Controller extends CI_Controller {
     	echo json_encode([
     		'code' => $code,
     		'msg' => $msg
-    	]);
+        ]);
+        exit();
     }
 
 }

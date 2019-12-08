@@ -455,5 +455,14 @@ class CI_Cache_redis extends CI_Driver
     public function ltrim($id, $start, $end)
     {
         return $this->_redis->lTrim($id, $start, $end);
+	}
+	
+	function incr($key, $offset = 1, $ttl = 86400)
+    {
+        $incr =$this->_redis->incrBy($key, $offset);
+        if ($incr == $offset) {
+            $this->_redis->expire($key, $ttl);
+        }
+        return $incr;
     }
 }
